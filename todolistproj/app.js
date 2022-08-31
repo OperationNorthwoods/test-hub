@@ -1,5 +1,6 @@
 const todoList = []
-let userInput = ''
+let userInput = '0'
+let deleteInput = '0'
 
 while (userInput !== 'quit') {
     userInput = prompt('Enter your command. Valid commands are "new", "list", "delete" and "quit".').toLowerCase()
@@ -11,8 +12,7 @@ while (userInput !== 'quit') {
         if (todoList.length !== 0) {
             console.log('**************')
             for (i = 0; i < todoList.length; i++) {
-                console.log(`${i} ${todoList[i]}`)
-            }
+                console.log(`${i} ${todoList[i]}`)}
             console.log('**************')
         } else {
             console.log('Your list is empty. Use "new" command to add item')
@@ -20,12 +20,20 @@ while (userInput !== 'quit') {
 
     }
     else if (userInput === 'delete') {
-        console.log('still working on this 2')
-    }
-    else if (userInput === 'emptylist') {
-        console.log('your list is empty')
-    }
-    else {
+        if (todoList.length <= 0) {console.log('nothing to delete!')
+        } else {
+            console.log('**************')
+            for (i = 0; i < todoList.length; i++) {
+                console.log(`${i} ${todoList[i]}`)}
+            console.log('**************')
+            deleteInput = prompt('enter indice of item to delete from list. Please only enter 1.')
+                if (isNaN(deleteInput = true)){
+                    console.log('Please enter a valid Number!')
+                } else {
+                    todoList.splice(deleteInput,1)
+                }
+        }
+    } else {
         console.log('try again. press refresh.')
     }
 }
