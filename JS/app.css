@@ -1,0 +1,59 @@
+/* .rainbow:nth-child(odd) {
+    color: blue
+}
+
+.rainbow:nth-child(even) {
+    color: red
+} */
+
+#a1 {
+    color: red
+}
+
+#a2 {
+    color: orange
+}
+
+#a3 {
+    color: green
+}
+
+#a4 {
+    color: blue
+}
+
+#a5 {
+    color: indigo
+}
+
+#a6 {
+    color: violet
+}
+
+#a7 {
+    color: fuchsia
+}
+
+#a8 {
+    color: white
+}
+
+#a9 {
+    color: black
+}
+
+#a10 {
+    color: fuchsia
+}
+
+/* ============================================================================================= */
+
+p {
+    display: inline;
+}
+
+body {
+    display: block;
+    width: 95%;
+    background-color: rgba(193, 189, 189, 0.80)
+}
