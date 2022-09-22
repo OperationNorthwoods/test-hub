@@ -48,6 +48,51 @@
 
 /* ============================================================================================= */
 
+.itty {
+    display: inline
+}
+
+.itty10 {
+    color: red
+}
+
+.itty9 {
+    color: orange
+}
+
+.itty8 {
+    color: green
+}
+
+.itty7 {
+    color: blue
+}
+
+.itty6 {
+    color: indigo
+}
+
+.itty5 {
+    color: violet
+}
+
+.itty4 {
+    color: fuchsia
+}
+
+.itty3 {
+    color: white
+}
+
+.itty2 {
+    color: black
+}
+
+#.itty1 {
+    color: fuchsia
+}
+
+/* ============================================================================================= */
 p {
     display: inline;
 }
@@ -56,4 +101,8 @@ body {
     display: block;
     width: 95%;
     background-color: rgba(193, 189, 189, 0.80)
+}
+
+.block {
+    display: block;
 }
