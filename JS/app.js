@@ -18,6 +18,8 @@ const c4 = document.querySelector('#click4')
 const c5 = document.querySelector('#click5')
 const c6 = document.querySelector('#click6')
 
+// const k1 = document.querySelector('#keypress1')
+
 c1.onclick = function () {
     for (let i = 1; i < 11; i++) {
         alert(`I am cool! This is alert number ${i}`)
@@ -46,3 +48,13 @@ c5.addEventListener('click', function () {
 // ^^^ this contains "alert", but placed inside of an anonymous function.
 // this means the function is called by the script but not executed until a 
 // click event on button 5 happens
+
+// =====================================================================================
+// Keyboard events below
+
+window.addEventListener('keydown', function (e) {
+    document.querySelector('#keypress1').innerHTML = (e.code)
+    console.log(e.code)
+})
+
+// ^this displays keycode in console and in "keypress1^ p element

@@ -100,7 +100,13 @@ p {
 body {
     display: block;
     width: 95%;
-    background-color: rgba(193, 189, 189, 0.80)
+    background-color: rgba(193, 189, 189, 0.80) !important;
+    /* ^!important over rides bootstrap defaults^ */
+}
+
+html {
+    background-color: white !important;
+    /* ^!important over rides bootstrap defaults^ */
 }
 
 .block {
