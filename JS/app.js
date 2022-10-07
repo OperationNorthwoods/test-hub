@@ -17,8 +17,11 @@ const c3 = document.querySelector('#click3')
 const c4 = document.querySelector('#click4')
 const c5 = document.querySelector('#click5')
 const c6 = document.querySelector('#click6')
-
+// break 
 // const k1 = document.querySelector('#keypress1')
+const permaForm = document.querySelector('#perma-form')
+
+
 
 c1.onclick = function () {
     for (let i = 1; i < 11; i++) {
@@ -54,7 +57,17 @@ c5.addEventListener('click', function () {
 
 window.addEventListener('keydown', function (e) {
     document.querySelector('#keypress1').innerHTML = (e.code)
-    console.log(e.code)
+    console.log(e, e.code)
+    document.querySelector('#keypress2').innerHTML = (e)
 })
+// ^^^ this displays key's code in the console, and in "keypress1" para.
+// it also displays the object created by the keypress in the console.
+// 
+// The 'e' in this function is a event created by the keypress that
+// has different properties that let you use something like e.code
+// to display the exact key pressed.
 
-// ^this displays keycode in console and in "keypress1^ p element
+permaForm.addEventListener('submit', function (e){
+e.preventDefault();
+
+});
