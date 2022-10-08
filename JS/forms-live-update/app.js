@@ -15,3 +15,9 @@ form.addEventListener("input", function (e) {
     list.append(newLI);
     // form.reset();
 });
+
+
+// Future feature idea:
+// iterate over all 'LI's and delete the oldest ones,
+// once the amount of 'LI's stored under the 'UL' 
+// reaches a certain number of entries.
