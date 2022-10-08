@@ -11,10 +11,12 @@ form.addEventListener("input", function (e) {
     const newLI = document.createElement('LI');
     newLI.innerText = input;
     para.innerText = input;
-    console.log("======");
     list.append(newLI);
+    console.log("======");
     // form.reset();
+    const listArr = Array.from(entries)
 });
+const entries = document.querySelectorAll('li');
 
 
 // Future feature idea:
