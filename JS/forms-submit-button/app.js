@@ -1,6 +1,6 @@
 const form = document.querySelector('#firstForm');
 const data = document.querySelector('#info');
-const list = document.querySelector('#list')
+const list = document.querySelector('#list');
 
 form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -13,3 +13,4 @@ form.addEventListener("submit", function (e) {
     list.append(newLI);
     form.reset();
 });
+
