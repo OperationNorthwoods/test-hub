@@ -1,0 +1,23 @@
+
+config.py
+credentials_google.json
+credentials.json
+token.json
+ezgmail
+
+# token.json and credentials.json are both needed to make ezgmail
+
+# from the flask docs below
+venv/
+
+*.pyc
+__pycache__/
+instance/
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+dist/
+build/
+*.egg-info/
