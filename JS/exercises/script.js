@@ -18,3 +18,7 @@ function isPalindrome(input) {
         return console.log('false')
     }
 }
+
+function organize(input) {
+    input.split('')
+}
