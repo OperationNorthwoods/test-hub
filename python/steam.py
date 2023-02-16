@@ -1,8 +1,10 @@
 import requests
 import json
-from config import API_KEY, STEAM_ID
+from config import API_KEY, STEAM_ID, EMAIL
 import shelve
 from datetime import datetime
+import openpyxl
+import ezgmail
 
 current_datetime = datetime.now()
 current_date = current_datetime.strftime('%Y-%m-%d')
@@ -16,11 +18,17 @@ if response.status_code == 200:
 
     for game in data['response']['games']:
         name = game['name']
-        playtime = game['playtime_forever']
-        hours = round((playtime / 60), 2)
-        print(name, hours)
+        playtime_forever = game['playtime_forever']
+        playtime_2weeks = game['playtime_2weeks']
+
+        # hours = round((playtime / 60), 2)
+        # print(name, hours)
+    
+    print('Sucess. Data Fetched from API and written to workbook.')
+    ezgmail.send(f'{EMAIL}', 'Sucess!', 'Data Fetched from API and written to workbook.')
 else:
-    print("Error fetching data from API")
+    ezgmail.send(f'{EMAIL}', 'Error!', 'Error fetching data from API.')
+    print("Error fetching data from API.")
     
 # print(current_date)
 # print(current_time)
