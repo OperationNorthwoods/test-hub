@@ -17,32 +17,32 @@ response = requests.get(url)
 wb = openpyxl.load_workbook(f'{FILENAME}')
 sheet = wb.active
 max = sheet.max_row
+max_Iter = max + 1  # make sure we don't go too far down rows
+col_A, col_B, col_C, col_D, col_E, col_F = range(1, 7)
 # All Columns should have an equal max_row
 #
 # {FILENAME} Column Cheatsheet
 # A=Date B=Time C=Game D=TotalHours
 # E=HoursAddedSinceLastRan F=Last2WeeksHours
 
-if response.status_code == 200: # 200 = it worked
-    
+if response.status_code == 200:  # 200 = it worked
+
     # Parse the JSON data
     data = json.loads(response.content)
 
-    gameCounter = 0 # counts number of games in json response
-    gameDict = {} # storing games with game as key, and minutes as values in a list
+    gameCounter = 0  # counts number of games in json response
+    gameDict = {}  # storing games with game as key, and minutes as values in a list
 
     for game in data['response']['games']:
-        gameCounter+=1
+        gameCounter += 1
         name = game['name']
         playtime_forever = game['playtime_forever']
         playtime_2weeks = game['playtime_2weeks']
         gameDict[name] = (playtime_forever, playtime_2weeks)
-        
+    
     # Start writing to workbook
-    max_Iter = max + 1  # make sure we don't go too far down rows
-    col_A, col_B, col_C, col_D, col_E, col_F = range(1, 7)
-    temp = list(gameDict.keys()) # makes a list of all keys in dict aka every game's name
-    tempCount = 0 # we use this as index of 'temp' so we only access 1 game name at a time
+    temp = list(gameDict.keys())  # makes a list of all keys in dict aka every game's name
+    tempCount = 0  # we use this as index of 'temp' so we only access 1 game name at a time
 
     # Main writing loop; loops throught all columns in one row, one row at a time.
     while max_Iter <= max+gameCounter:
@@ -50,7 +50,7 @@ if response.status_code == 200: # 200 = it worked
         sheet.cell(row=max_Iter, column=col_B, value=current_time)
         sheet.cell(row=max_Iter, column=col_C, value=temp[tempCount])
         sheet.cell(row=max_Iter, column=col_D, value=gameDict[temp[tempCount]][0])
-        sheet.cell(row=max_Iter, column=col_F, value=gameDict[tempCount][1])
+        sheet.cell(row=max_Iter, column=col_F, value=gameDict[temp[tempCount]][1])
 
         # logic to determine value of column_E
         if max != 1:
@@ -65,24 +65,26 @@ if response.status_code == 200: # 200 = it worked
                     sheet.cell(row=max_Iter, column=col_E, value=hours_since_last_played)
                     found_match = True
                     break
-            if not found_match:
-                hours_since_last_played = 'N/A'
-                sheet.cell(row=max_Iter, column=col_E, value=hours_since_last_played)
+            # if not found_match:                 # I dont think this works
+            #     hours_since_last_played = 'N/A'
+            #     sheet.cell(row=max_Iter, column=col_E, value=hours_since_last_played)
 
         # adds border below last row
         if max_Iter == max+gameCounter:
-            print('put bottom border stuff here')
-
-        tempCount+=1
-        max_Iter+=1
-            
-
+            border = Border(bottom=Side(style='thick'))
+            for i in range(col_A, col_F+1):
+                sheet.cell(row=max_Iter, column=i).border = border
     
 
+        tempCount += 1
+        max_Iter += 1
+
     print('Sucess. Data Fetched from API and written to workbook.')
-    ezgmail.send(f'{EMAIL}', 'Sucess!', 'Data Fetched from API and written to workbook.')
+    ezgmail.send(f'{EMAIL}', 'Sucess!', f'Data Fetched from API and written to workbook. {current_datetime}.')
 else:
-    ezgmail.send(f'{EMAIL}', 'Error!', 'Error fetching data from API.')
+    sheet.cell(row=max_Iter, column=col_A, value=current_date)
+    sheet.cell(row=max_Iter, column=col_B, value=current_time)
+    ezgmail.send(f'{EMAIL}', 'Error!', f'Error fetching data from API. {current_datetime}.')
     print("Error fetching data from API.")
 
 wb.save(f'{FILENAME}')
