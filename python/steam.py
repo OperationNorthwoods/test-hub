@@ -29,7 +29,7 @@ if response.status_code == 200: # 200 = it worked
     data = json.loads(response.content)
 
     gameCounter = 0 # counts number of games in json response
-    gameDict = {}
+    gameDict = {} # storing games with game as key, and minutes as values in a list
 
     for game in data['response']['games']:
         gameCounter+=1
@@ -41,10 +41,10 @@ if response.status_code == 200: # 200 = it worked
     # Start writing to workbook
     max_Iter = max + 1  # make sure we don't go too far down rows
     col_A, col_B, col_C, col_D, col_E, col_F = range(1, 7)
-    temp = list(gameDict.keys()) # makes 
-    tempCount = 0
+    temp = list(gameDict.keys()) # makes a list of all keys in dict aka every game's name
+    tempCount = 0 # we use this as index of 'temp' so we only access 1 game name at a time
 
-    # main writing loop. loops throught all columns, one row at a time.
+    # Main writing loop; loops throught all columns in one row, one row at a time.
     while max_Iter <= max+gameCounter:
         sheet.cell(row=max_Iter, column=col_A, value=current_date)
         sheet.cell(row=max_Iter, column=col_B, value=current_time)
@@ -52,7 +52,25 @@ if response.status_code == 200: # 200 = it worked
         sheet.cell(row=max_Iter, column=col_D, value=gameDict[temp[tempCount]][0])
         sheet.cell(row=max_Iter, column=col_F, value=gameDict[tempCount][1])
 
-        if max_Iter <= max+gameCounter:
+        # logic to determine value of column_E
+        if max != 1:
+            current_game = temp[tempCount]
+            new_hours = gameDict[temp[tempCount]][0]
+            found_match = False
+            for i in range(max, 0, -1):
+                if sheet.cell(row=i, column=col_C).value == current_game:
+                    previous_hours = sheet.cell(row=i, column=col_D).value
+                    if isinstance(previous_hours, (int, float)):
+                        hours_since_last_played = new_hours - previous_hours
+                    sheet.cell(row=max_Iter, column=col_E, value=hours_since_last_played)
+                    found_match = True
+                    break
+            if not found_match:
+                hours_since_last_played = 'N/A'
+                sheet.cell(row=max_Iter, column=col_E, value=hours_since_last_played)
+
+        # adds border below last row
+        if max_Iter == max+gameCounter:
             print('put bottom border stuff here')
 
         tempCount+=1
@@ -66,8 +84,6 @@ if response.status_code == 200: # 200 = it worked
 else:
     ezgmail.send(f'{EMAIL}', 'Error!', 'Error fetching data from API.')
     print("Error fetching data from API.")
-    
-# print(current_date)
-# print(current_time)
-# print(current_datetime)
-# !! works !!
+
+wb.save(f'{FILENAME}')
+
