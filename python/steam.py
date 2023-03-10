@@ -2,6 +2,7 @@ import requests
 import json
 from config import API_KEY, STEAM_ID, EMAIL, FILENAME
 from datetime import datetime
+import syslog
 import openpyxl
 from openpyxl.styles.borders import Border, Side
 import ezgmail
@@ -80,11 +81,18 @@ if response.status_code == 200:  # 200 = it worked
         max_Iter += 1
 
     print('Sucess. Data Fetched from API and written to workbook.')
-    ezgmail.send(f'{EMAIL}', 'Sucess!', f'Data Fetched from API and written to workbook. {current_datetime}.')
+    try:
+        ezgmail.send(f'{EMAIL}', 'Sucess!', f'Data Fetched from API and written to workbook. {current_datetime}.')
+    except ezgmail.EZGmailException:
+        print('EZGmail exception handled.')
 else:
     sheet.cell(row=max_Iter, column=col_A, value=current_date)
     sheet.cell(row=max_Iter, column=col_B, value=current_time)
-    ezgmail.send(f'{EMAIL}', 'Error!', f'Error fetching data from API. {current_datetime}.')
+    try:
+        ezgmail.send(f'{EMAIL}', 'Error!', f'Error fetching data from API. {current_datetime}.')
+    except ezgmail.EZGmailException:
+        print('EZGmail exception handled.')
+
     print("Error fetching data from API.")
 
 wb.save(f'{FILENAME}')
