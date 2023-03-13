@@ -7,6 +7,17 @@ import openpyxl
 from openpyxl.styles.borders import Border, Side
 import ezgmail
 
+def sendEmail(state):
+    if state == 'pass':
+        ezgmail.send(f'{EMAIL}', 'Sucess!', f'Data Fetched from API and written to workbook. {current_datetime}.')
+    elif state == 'fail':
+        ezgmail.send(f'{EMAIL}', 'Error!', f'Error fetching data from API. {current_datetime}.')
+    else:
+        print('sendEmail() must have parameter "pass" or "fail".')
+        raise Exception
+    
+
+
 # setting up seperate date and time variables
 current_datetime = datetime.now()
 current_date = current_datetime.strftime('%Y-%m-%d')
@@ -82,14 +93,14 @@ if response.status_code == 200:  # 200 = it worked
 
     print('Sucess. Data Fetched from API and written to workbook.')
     try:
-        ezgmail.send(f'{EMAIL}', 'Sucess!', f'Data Fetched from API and written to workbook. {current_datetime}.')
+        sendEmail('pass')
     except ezgmail.EZGmailException:
         print('EZGmail exception handled.')
 else:
     sheet.cell(row=max_Iter, column=col_A, value=current_date)
     sheet.cell(row=max_Iter, column=col_B, value=current_time)
     try:
-        ezgmail.send(f'{EMAIL}', 'Error!', f'Error fetching data from API. {current_datetime}.')
+        sendEmail('fail')
     except ezgmail.EZGmailException:
         print('EZGmail exception handled.')
 
