@@ -1,8 +1,0 @@
-
-
-date and time = 20/06/2023 03:10:25
-The total number of wins is 5
-The total number of losses is 2
-The average number of rolls per win is 8.2
-The average number of rolls per loss is 2.5
-The winning percentage is 0.7142857142857143
