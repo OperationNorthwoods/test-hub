@@ -1,0 +1,14 @@
+# from the flask docs below, copied from python2 folder, but removed some
+venv/
+
+*.pyc
+__pycache__/
+instance/
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+dist/
+build/
+*.egg-info/
