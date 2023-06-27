@@ -18,12 +18,23 @@ class Deck:
     
     def shuffle(self):
         random.shuffle(self._cards)
-        
 
+    def isPresent(self, suit, rank):
+        query = str(Card(suit, rank))
+        for card in self._cards:
+            index = self._cards.index(card)
+            if str(card) == query:
+                print('Yes, the ' + str(card))
+                print(f'Card is present at position {index}.')
+                return
+                
+                
 my_deck = Deck()
 
-print(my_deck)
+# print(my_deck)
 
-Deck.shuffle(my_deck)
-print('========================================================')
-print(my_deck)
+# Deck.shuffle(my_deck)
+# print('========================================================')
+# print(my_deck)
+
+Deck.isPresent(my_deck, 'diamonds', '8')
