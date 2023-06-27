@@ -2,6 +2,8 @@ from card import Card
 import random
 
 class Deck:
+    suits = ('clubs','diamonds','hearts','spades')
+    ranks = ('2','3','4','5','6','7','8','9','10','jack','queen','king','ace')
 
     def __init__(self):
         self._cards = []
@@ -11,12 +13,9 @@ class Deck:
         return ', '.join([str(card) for card in self._cards])
 
     def build(self):
-        suits = ('clubs','diamonds','hearts','spades')
-        ranks = ('2','3','4','5','6','7','8','9','10','jack','queen','king','ace')
-        
-        self._cards = [Card(s, r) for s in suits for r in ranks]
+        self._cards = [Card(s, r) for s in self.suits for r in self.ranks]
         random.shuffle(self._cards)
-
+    
     def length(self):
         return len(self._cards)
     
@@ -33,7 +32,6 @@ class Deck:
                 return
                 
 # my_deck = Deck()
-
 # print(my_deck)
 
 # Deck.shuffle(my_deck)

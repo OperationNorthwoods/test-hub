@@ -43,9 +43,9 @@ class Player:
             raise ValueError('You must provide either a Card object or a suit and rank.')
 
 
-player_one = Player('one')
-my_deck = Deck()
-player_one.draw(my_deck)
-player_one.draw(my_deck)
-print(player_one.show_hand())
-player_one.discard(None, 'diamond', 'ace')
+# player_one = Player('one')
+# my_deck = Deck()
+# player_one.draw(my_deck)
+# player_one.draw(my_deck)
+# print(player_one.show_hand())
+# player_one.discard(None, 'diamond', 'ace')

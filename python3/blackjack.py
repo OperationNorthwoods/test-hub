@@ -4,7 +4,7 @@ from player import Player
 import random
 
 
-# Uses inheritance to make a special card from card.py.
+# Uses inheritance to make a special card from Card.
 class BlackjackCard(Card):
     
     def __init__(self, suit, rank):
@@ -16,56 +16,67 @@ class BlackjackCard(Card):
         else:
             self.value = int(rank)
 
-# Uses inheritance to make a special deck from deck.py.
+# Uses inheritance to make a special deck from Deck.
 class BlackjackDeck(Deck):
     def __init__(self, num_decks=1):
-        self._cards = [BlackjackCard(suit, rank) for _ in range(num_decks)
-                       for suit in Deck.suits for rank in Deck.ranks]
+        self.num_decks = num_decks
+        super().__init__()
+
+    def build(self): # Overrides inherited Deck.build() method.
+        self._cards = [BlackjackCard(suit, rank) for _ in range(self.num_decks)
+                       for suit in self.suits for rank in self.ranks]
+        # if num_decks>1, multiple decks will be contained in one list. This is normal for Blackjack.
         random.shuffle(self._cards)
+    
+    # BlackjackDeck() tested and working.
 
-class BlackjackGame:
-    def __init__(self, num_decks=1):
-        self.deck = BlackjackDeck(num_decks)
-        self.players_hand = []
-        self.dealers_hand = []
+# class BlackjackGame:
+#     def __init__(self, num_decks=1):
+#         self.deck = BlackjackDeck(num_decks)
+#         self.players_hand = []
+#         self.dealers_hand = []
         
-        # Not sure about this one.
-        def deal_initial_cards(self):
-            self.players_hand.append(self.deck.draw())
-            self.dealers_hand.append(self.deck.draw())
-            self.players_hand.append(self.deck.draw())
-            self.dealers_hand.append(self.deck.draw())
+#         # Not sure about this one.
+#         def deal_initial_cards(self):
+#             self.players_hand.append(self.deck.draw())
+#             self.dealers_hand.append(self.deck.draw())
+#             self.players_hand.append(self.deck.draw())
+#             self.dealers_hand.append(self.deck.draw())
 
-        # Elegant scorekeeping method for dealing with Aces.
-        def calculate_score(self, hand):
-            score = 0
-            aces = 0
+#         # Elegant scorekeeping method for dealing with Aces.
+#         def calculate_score(self, hand):
+#             score = 0
+#             aces = 0
 
-            for card in hand:
-                if card.rank == 'ace':
-                    score += 11
-                    aces += 1
-                else:
-                    score += card.value
+#             for card in hand:
+#                 if card.rank == 'ace':
+#                     score += 11
+#                     aces += 1
+#                 else:
+#                     score += card.value
 
-            # if score is over 21 and there is an ace in hand, reduce score by 10
-            while score > 21 and aces:
-                score -= 10
-                aces -= 1
+#             # if score is over 21 and there is an ace in hand, reduce score by 10
+#             while score > 21 and aces:
+#                 score -= 10
+#                 aces -= 1
 
-            return score
+#             return score
 
 
-         # Implement other methods like player_hit, player_stand, dealer_play etc.
+#          # Implement other methods like player_hit, player_stand, dealer_play etc.
 
-def main():
-    print('Welcome to Blackjack!')
-    game = BlackjackGame()
-    game.deal_initial_cards()
+# def main():
+    # print('Welcome to Blackjack!')
+    # game = BlackjackGame()
+    # game.deal_initial_cards()
 
 # Add game logic here - player decisions, dealer decisions, etc.
 
+#
+my_deck = BlackjackDeck(2)
+print(my_deck.length())
 
 
-if __name__ == "__main__":
-    main()
+#
+# if __name__ == "__main__":
+#     main()
