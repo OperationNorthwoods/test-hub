@@ -13,13 +13,12 @@ class Card:
             self._rank = rank
         else:
             raise ValueError(f"Invalid rank. Choose from {self.ranks}")
-        # Validates inputs when creating card object
+        # Validates inputs when creating card object.
 
     def __str__(self):
         return f'{self.rank} of {self.suit}'
-
-    
-    @property #this transforms this funciton into an attribute, no () are needed to access it
+ 
+    @property # This transforms this funciton into an attribute, no () are needed to access it.
     def suit(self):
         return self._suit
     # ^^ this is a getter ^^
