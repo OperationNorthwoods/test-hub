@@ -16,8 +16,14 @@ class Deck:
         
         self._cards = [Card(s, r) for s in suits for r in ranks]
     
-    # def shuffle <<< figure this out next
+    def shuffle(self):
+        random.shuffle(self._cards)
+        
 
 my_deck = Deck()
 
+print(my_deck)
+
+Deck.shuffle(my_deck)
+print('========================================================')
 print(my_deck)

@@ -8,7 +8,7 @@ class Card:
         self._rank = rank
 
     def __str__(self):
-        return f'The card is a {self.rank} of {self.suit}'
+        return f'{self.rank} of {self.suit}'
 
     
     @property #this transforms this funciton into an attribute, no () are needed to access it
