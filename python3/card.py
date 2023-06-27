@@ -4,15 +4,13 @@ class Card:
     ranks = ('2','3','4','5','6','7','8','9','10','jack','queen','king','ace')
 
     def __init__(self, suit, rank):
-        if suit in self.suits:
-            self._suit = suit
-        else:
+        if suit not in self.suits:
             raise ValueError(f"Invalid suit. Choose from {self.suits}")
+        self._suit = suit
 
-        if rank in self.ranks:
-            self._rank = rank
-        else:
+        if rank not in self.ranks:
             raise ValueError(f"Invalid rank. Choose from {self.ranks}")
+        self._rank = rank
         # Validates inputs when creating card object.
 
     def __str__(self):

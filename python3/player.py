@@ -13,7 +13,9 @@ class Player:
     def show_hand(self):
         return ', '.join([str(card) for card in self._hand])
 
-    def discard(self, card=None, suit=None, rank=None):
+    def discard(self, card=None, suit=None, rank=None): # If not using explicit parameter values (ie suit='x' and rank='y') you must place None for the first argument.
+        # IE: `player_one.discard('diamond', 'ace')` < WRONG. This will fail to trigger the proper if statement/Card() obj input validaiton.
+        # IE: `player_one.discard(None, 'diamond', 'ace')` < Perfect.
         # Flexible discard method can take either a direct card object or a suit and rank parameter.
         if card is not None:
             # The card object is provided directly.
@@ -26,6 +28,7 @@ class Player:
             # The suit and rank are provided, so create a Card object.
             try:
                 query = Card(suit, rank)
+                print(f"Created card: {query}")
             except ValueError as e:
                 print(e)
                 return
@@ -45,4 +48,4 @@ my_deck = Deck()
 player_one.draw(my_deck)
 player_one.draw(my_deck)
 print(player_one.show_hand())
-player_one.discard('diamond', 'ace')
+player_one.discard(None, 'diamond', 'ace')
