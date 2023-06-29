@@ -73,8 +73,11 @@ class BlackjackDeck(Deck):
 # Add game logic here - player decisions, dealer decisions, etc.
 
 #
-my_deck = BlackjackDeck(2)
-print(my_deck.length())
+# my_deck = BlackjackDeck(2)
+# print(my_deck.length())
+
+my_card = BlackjackCard(2)
+print(my_card.suit)
 
 
 #

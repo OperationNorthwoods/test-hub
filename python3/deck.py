@@ -6,16 +6,31 @@ class Deck:
     ranks = ('2','3','4','5','6','7','8','9','10','jack','queen','king','ace')
 
     def __init__(self):
-        self._cards = []
+        self._cards = None
+        self.cards = []
+
         self.build()
     
     def __str__(self):
         return ', '.join([str(card) for card in self._cards])
 
     def build(self):
-        self._cards = [Card(s, r) for s in self.suits for r in self.ranks]
+        self.cards = [Card(s, r) for s in self.suits for r in self.ranks]
         random.shuffle(self._cards)
+
+    @property
+    def cards(self):
+        return self._cards
+# Getter must be defined before the Setter, otherwise Error is thrown.
+    @cards.setter
+    def cards(self, cards):
+        if isinstance(cards, list) and all(isinstance(card, Card) for card in cards):
+            self._cards = cards
+        else:
+            raise ValueError("cards should be a list of Card objects")
+        # Input validation.
     
+    @property
     def length(self):
         return len(self._cards)
     

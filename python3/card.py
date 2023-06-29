@@ -4,15 +4,14 @@ class Card:
     ranks = ('2','3','4','5','6','7','8','9','10','jack','queen','king','ace')
 
     def __init__(self, suit, rank):
-        if suit not in self.suits:
-            raise ValueError(f"Invalid suit. Choose from {self.suits}")
-        self._suit = suit
+        self._suit = None
+        self.suit = suit
 
-        if rank not in self.ranks:
-            raise ValueError(f"Invalid rank. Choose from {self.ranks}")
-        self._rank = rank
-        # Validates inputs when creating card object.
+        self._rank = None
+        self.rank= rank
+        # Calls setters which perform input validation when creating card object.
 
+    # This returns a custom string when my_card (obj of Card()) is called, instead of the default object reference
     def __str__(self):
         return f'{self.rank} of {self.suit}'
  
@@ -48,6 +47,6 @@ class Card:
 # print(my_card.suit)
 # print(my_card.rank)
 
-# my_card.rank = "9"
+# my_card.rank = "15"
 
 # print(my_card)
