@@ -48,12 +48,9 @@ class Deck:
                 
 # my_deck = Deck()
 # print(my_deck)
-
 # Deck.shuffle(my_deck)
 # print('========================================================')
 # print(my_deck)
-
 # for i in range(0,52):
 #     print(Deck.deal(my_deck))
-
-# Deck.isPresent(my_deck, 'diamonds', '8')
+# Deck.is_Present(my_deck, 'diamonds', '8')

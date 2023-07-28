@@ -76,8 +76,8 @@ class BlackjackDeck(Deck):
 # my_deck = BlackjackDeck(2)
 # print(my_deck.length())
 
-my_card = BlackjackCard(2)
-print(my_card.suit)
+# my_card = BlackjackCard(2)
+# print(my_card.suit)
 
 
 #

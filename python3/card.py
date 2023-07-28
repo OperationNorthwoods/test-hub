@@ -41,12 +41,8 @@ class Card:
 
 
 # my_card = Card("hearts", "6")
-
 # print(my_card)
-
 # print(my_card.suit)
 # print(my_card.rank)
-
 # my_card.rank = "15"
-
 # print(my_card)
