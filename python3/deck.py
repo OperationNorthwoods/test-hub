@@ -54,3 +54,5 @@ class Deck:
 # for i in range(0,52):
 #     print(Deck.deal(my_deck))
 # Deck.is_Present(my_deck, 'diamonds', '8')
+# mydeck = Deck()
+# print(mydeck)
